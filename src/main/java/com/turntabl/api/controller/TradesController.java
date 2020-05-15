@@ -4,6 +4,7 @@ import com.turntabl.api.domain.Account;
 import com.turntabl.api.domain.ProductDetail;
 import com.turntabl.api.domain.Side;
 import com.turntabl.api.domain.Trade;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,19 @@ import java.util.List;
 
 @RestController
 public class TradesController {
+
     @GetMapping("/trades")
+    @ApiOperation(
+            value = "Returns all trades ",
+            notes = "Multiple trades object values, separated by comma",
+            extensions = {
+                    @Extension(name = "links", properties = {
+                            @ExtensionProperty(name = "tradeId", value = "localhost:8081/trades/{tradeId}"),
+                            @ExtensionProperty(name = "productId", value = "localhost:8083/products/{productId}"),
+                            @ExtensionProperty(name = "accountId", value = "localhost:8082/account/{accountId}")
+                    })
+            }
+    )
     public List<Trade> getTrades() {
         List<Trade> trades = new ArrayList<>();
 
