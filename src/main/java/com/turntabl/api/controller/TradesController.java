@@ -18,14 +18,14 @@ public class TradesController {
     @GetMapping("/trades")
     @ApiOperation(
             value = "Returns all trades ",
-            notes = "Multiple trades object values, separated by comma"
-            /*extensions = {
-                    @Extension(name = "links", properties = {
-                            @ExtensionProperty(name = "tradeId", value = "localhost:8081/trades/{tradeId}"),
-                            @ExtensionProperty(name = "productId", value = "localhost:8083/products/{productId}"),
-                            @ExtensionProperty(name = "accountId", value = "localhost:8082/account/{accountId}")
+            notes = "Multiple trades object values, separated by comma",
+            extensions = {
+                    @Extension( name = "connectable", properties = {
+                            @ExtensionProperty(name = "connectable1", value = "tradeId"),
+                            @ExtensionProperty(name = "connectable2", value = "productId"),
+                            @ExtensionProperty(name = "connectable3", value = "accountId"),
                     })
-            }*/
+            }
     )
     public List<Trade> getTrades() {
         List<Trade> trades = new ArrayList<>();
