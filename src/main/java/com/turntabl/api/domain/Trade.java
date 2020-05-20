@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @ApiModel(description = "Trade data Model")
 public class Trade {
-    @ApiModelProperty(value = "tradeId description",readOnly = true)
+    @ApiModelProperty(value = "tradeId description")
     private String tradeId;
     @ApiModelProperty(notes = "account description")
     private Account account;
