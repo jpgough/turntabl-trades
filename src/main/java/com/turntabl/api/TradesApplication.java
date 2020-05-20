@@ -30,7 +30,7 @@ public class TradesApplication {
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(metaInfo())
-				.host("http://localhost/trades");
+				.host("localhost/trades");
 	}
 
 	private ApiInfo metaInfo() {
