@@ -3,7 +3,7 @@ package com.turntabl.api.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel( description = "ProductDetail data Model")
+@ApiModel( description = "ProductDetail data Model description")
 public class ProductDetail {
     @ApiModelProperty(value = "productId description")
     private String productId;

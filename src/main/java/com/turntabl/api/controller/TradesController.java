@@ -20,11 +20,9 @@ public class TradesController {
             value = "Returns all trades ",
             notes = "Multiple trades object values, separated by comma",
             extensions = {
-                    @Extension( name = "connectable", properties = {
-                            @ExtensionProperty(name = "connectable1", value = "tradeId"),
-                            @ExtensionProperty(name = "connectable2", value = "productId"),
-                            @ExtensionProperty(name = "connectable3", value = "accountId"),
-                    })
+                    @Extension( name = "connectable", properties = { 
+                        @ExtensionProperty(name = "connectable1", value = "productId")
+                     })
             }
     )
     public List<Trade> getTrades() {
