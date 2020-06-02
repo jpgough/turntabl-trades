@@ -48,7 +48,7 @@ public class TradesApplication {
 				"https://www.apache.org/licesen.html"
 		);
 	}
-
+  
 	@Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -63,4 +63,5 @@ public class TradesApplication {
 		source.registerCorsConfiguration("/v2/api-docs", config);
 		return new CorsFilter(source);
 	}
+  
 }
