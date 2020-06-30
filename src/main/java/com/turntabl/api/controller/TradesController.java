@@ -23,13 +23,8 @@ public class TradesController {
 
     @GetMapping("/trades")
     @ApiOperation(
-            value = "Returns all trades ",
-            notes = "Multiple trades object values, separated by comma",
-            extensions = {
-                    @Extension( name = "connectable", properties = { 
-                        @ExtensionProperty(name = "connectable1", value = "productId")
-                     })
-            }
+            value = "View Trades",
+            notes = "Bought and sold financial assets."
     )
     public List<Trade> getTrades() {
      return tradesDemoData.getTrades();
