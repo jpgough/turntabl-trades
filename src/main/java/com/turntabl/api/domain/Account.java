@@ -5,11 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel( description = "Account data Model description")
 public class Account {
-    @ApiModelProperty(value = "accountId description")
+    @ApiModelProperty(value = "unique identifier for the account the trade was executed on")
     private String accountId;
-    @ApiModelProperty(value = "bookName description")
+    @ApiModelProperty(value = "book name of the account the trade was executed on")
     private String bookName;
-    @ApiModelProperty(value = "accountType description")
+    @ApiModelProperty(value = "book type of the account the trade was executed on")
     private String accountType;
 
     public String getAccountId() {
