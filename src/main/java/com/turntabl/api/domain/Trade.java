@@ -7,17 +7,17 @@ import java.math.BigDecimal;
 
 @ApiModel(description = "Trade data Model")
 public class Trade {
-    @ApiModelProperty(value = "tradeId description")
+    @ApiModelProperty(value = "unique identifier for the trade")
     private String tradeId;
-    @ApiModelProperty(notes = "account description")
+    @ApiModelProperty(notes = "account trade was executed on")
     private Account account;
-    @ApiModelProperty(value = "side description")
+    @ApiModelProperty(value = "trade bought or sold SELL or BUY")
     private Side side;
-    @ApiModelProperty(value = "quantity description")
+    @ApiModelProperty(value = "number of products bought or sold")
     private Integer quantity;
-    @ApiModelProperty(value = "price description")
+    @ApiModelProperty(value = "the price the trade was executed at")
     private BigDecimal price;
-    @ApiModelProperty(value = "productDetail description")
+    @ApiModelProperty(value = "details of the traded product")
     private ProductDetail productDetail;
 
     public String getTradeId() {

@@ -53,7 +53,7 @@ public class TradesApplication {
 	private ApiInfo metaInfo() {
 		return new ApiInfo(
 				"Trades API",
-				"trades api description",
+				"REST API which allows you to get live market prices, execute orders in real time and manage your orders.",
 				"1.0",
 				"Terms of Service",
 				new Contact("trades Contact", "", "tradecontact@email.io"),
