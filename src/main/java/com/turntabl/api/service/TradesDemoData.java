@@ -9,10 +9,17 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class TradesDemoData {
-    List<Trade> trades = new ArrayList<>();
+    private final List<Trade> trades = new ArrayList<>();
+    private final List<Account> accounts = new ArrayList<>();
+    private final List<ProductDetail> products = new ArrayList<>();
+    private final Random random = new Random();
+    private AtomicInteger currentId = new AtomicInteger(0);
+
 
     public TradesDemoData() {
         //Dummy data
@@ -21,36 +28,43 @@ public class TradesDemoData {
         p1.setExchange("LSE");
         p1.setProductId("P987");
         p1.setTicker("SGE");
+        products.add(p1);
 
         ProductDetail p2 = new ProductDetail();
         p2.setExchange("LSE");
         p2.setProductId("P556");
         p2.setTicker("0AI4");
+        products.add(p2);
 
         ProductDetail p3 = new ProductDetail();
         p3.setExchange("EPA");
         p3.setProductId("P999");
         p3.setTicker("ORA");
+        products.add(p3);
 
         ProductDetail p4 = new ProductDetail();
         p4.setExchange("NASDAQ");
         p4.setProductId("P387");
         p4.setTicker("GOOGL");
+        products.add(p4);
 
         ProductDetail p5 = new ProductDetail();
         p5.setExchange("NYSE");
         p5.setProductId("P225");
         p5.setTicker("CRM");
+        products.add(p5);
 
         ProductDetail p6 = new ProductDetail();
         p6.setExchange("NASDAQ");
         p6.setProductId("P821");
         p6.setTicker("ZM");
+        products.add(p6);
 
         ProductDetail p7 = new ProductDetail();
         p7.setExchange("ASX");
         p7.setProductId("P764");
         p7.setTicker("XRO");
+        products.add(p7);
 
 
         // Account
@@ -58,21 +72,25 @@ public class TradesDemoData {
         a1.setAccountId("ACC1");
         a1.setAccountType("Client");
         a1.setBookName("Euro Trades");
+        accounts.add(a1);
 
         Account a2 = new Account();
         a2.setAccountId("ACC2");
         a2.setAccountType("Offshore");
         a2.setBookName("Dollar Trades");
+        accounts.add(a2);
 
         Account a3 = new Account();
         a3.setAccountId("ACC3");
         a3.setAccountType("Special");
         a3.setBookName("Tech Trades");
+        accounts.add(a3);
 
         Account a4 = new Account();
         a4.setAccountId("ACC4");
         a4.setAccountType("Ordinary");
         a4.setBookName("Foreign Trades");
+        accounts.add(a4);
 
 
         // Trades
@@ -189,5 +207,32 @@ public class TradesDemoData {
 
     public List<Trade> getTrades() {
         return trades;
+    }
+
+    private List<Trade> rtTrades = new ArrayList<>();
+
+    public List<Trade> getRealTimeTrades() {
+        Trade randomTrade = new Trade();
+        randomTrade.setAccount(accounts.get(random.nextInt(accounts.size())));
+        randomTrade.setProductDetail(products.get(random.nextInt(products.size())));
+
+        if(random.nextInt(10) % 2 == 0) {
+            randomTrade.setSide(Side.BUY);
+        } else {
+            randomTrade.setSide(Side.SELL);
+        }
+
+        randomTrade.setQuantity(random.nextInt(250));
+        randomTrade.setTradeId("Trade " + currentId.incrementAndGet());
+        randomTrade.setPrice(new BigDecimal("" + random.nextDouble()*50));
+
+        rtTrades.add(randomTrade);
+
+        return rtTrades;
+    }
+
+    public void reset() {
+        rtTrades.clear();
+        currentId.set(0);
     }
 }
