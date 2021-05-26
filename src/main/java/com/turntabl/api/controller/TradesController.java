@@ -17,6 +17,11 @@ public class TradesController {
     @Autowired
     TradesDemoData tradesDemoData;
 
+    @GetMapping("/")
+    public String healthCheck() {
+        return "OK";
+    }
+
     @GetMapping("/trades")
     @ApiOperation(
             value = "View Trades",

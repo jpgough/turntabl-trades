@@ -1,0 +1,264 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "localhost.com",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "trades-controller",
+      "description": "Trades Controller"
+    }
+  ],
+  "paths": {
+    "/trades": {
+      "get": {
+        "tags": [
+          "trades-controller"
+        ],
+        "summary": "View Trades",
+        "description": "Bought and sold financial assets.",
+        "operationId": "getTradesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Trade"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "trades-controller"
+        ],
+        "summary": "Book Trade",
+        "operationId": "bookTradeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "trade",
+            "description": "trade",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/trades/rt": {
+      "get": {
+        "tags": [
+          "trades-controller"
+        ],
+        "summary": "View Trades in real time",
+        "description": "Bought and sold financial assets.",
+        "operationId": "getTradesRealTimeUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Trade"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/trades/rt/reset": {
+      "post": {
+        "tags": [
+          "trades-controller"
+        ],
+        "summary": "Reset Trades",
+        "operationId": "resetTradesUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "required": [
+        "accountId",
+        "accountType",
+        "bookName"
+      ],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "unique identifier for the account the trade was executed on"
+        },
+        "accountType": {
+          "type": "string",
+          "description": "book type of the account the trade was executed on"
+        },
+        "bookName": {
+          "type": "string",
+          "description": "book name of the account the trade was executed on"
+        }
+      },
+      "title": "Account",
+      "description": "Account data Model description"
+    },
+    "ProductDetail": {
+      "type": "object",
+      "required": [
+        "exchange",
+        "productId",
+        "ticker"
+      ],
+      "properties": {
+        "exchange": {
+          "type": "string",
+          "description": "the exchange on which the stock is listed"
+        },
+        "productId": {
+          "type": "string",
+          "description": "unique identifier for the product the trade was executed on"
+        },
+        "ticker": {
+          "type": "string",
+          "description": "the executed productâ€™s ticker symbol"
+        }
+      },
+      "title": "ProductDetail",
+      "description": "ProductDetail data Model description"
+    },
+    "Trade": {
+      "type": "object",
+      "required": [
+        "account",
+        "price",
+        "productDetail",
+        "quantity",
+        "side",
+        "tradeId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "account": {
+          "description": "account trade was executed on",
+          "$ref": "#/definitions/Account"
+        },
+        "price": {
+          "type": "number",
+          "description": "the price the trade was executed at"
+        },
+        "productDetail": {
+          "description": "details of the traded product",
+          "$ref": "#/definitions/ProductDetail"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of products bought or sold"
+        },
+        "side": {
+          "type": "string",
+          "description": "trade bought or sold SELL or BUY",
+          "enum": [
+            "BUY",
+            "SELL"
+          ]
+        },
+        "tradeId": {
+          "type": "string",
+          "description": "unique identifier for the trade",
+          "pattern": "^T[0-9]*$",
+          "maxLength": 10
+        }
+      },
+      "title": "Trade",
+      "description": "Trade data Model"
+    }
+  }
+}
